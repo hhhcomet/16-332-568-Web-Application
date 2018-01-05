@@ -1,0 +1,134 @@
+<!--
+Homework 5, question 2
+Completed by Rong Zhang
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function resetform()
+{
+    document.getElementById("myform").reset();//reset the form
+}
+
+function changeunits(name)
+{
+    document.getElementById("p1").innerHTML="You selected to use  "+name+" units." ;  //change p1 dynamically  
+}
+
+function changeshape(shp)
+{
+    document.getElementById("p2").innerHTML="You selected to find  the value for a "+shp+" shape.";// change p2 dynamically
+}
+
+function calculation()
+{
+    //get the values
+    var r=document.getElementById("radius").value;
+    var h=document.getElementById("height").value;
+    var PI=3.1415926536;
+    var v;
+    var shape=document.getElementById("shape").value;
+    if (shape=="Cylinder")//calculation
+    {
+        v=PI*r*r*h; 
+    }
+    else if(shape=="Cone")
+    {
+        v=PI*r*r*h/3;
+    }
+    else if(shape=="Sphere")
+    {
+        v=PI*r*r*r*4/3;
+    }
+	
+	//print the values 
+    document.getElementById("r").innerText=r;
+    document.getElementById("h").innerText=h;
+    document.getElementById("v").innerText=v;
+    document.getElementById("t4").innerText=shape;
+	
+	var1=document.getElementById("English").checked;
+	var2=document.getElementById("SI").checked;
+	
+	//print the units
+	if(var1==true)
+    {
+        document.getElementById("t1").innerText="(ft)";
+        document.getElementById("t2").innerText="(ft)";
+        document.getElementById("t3").innerText="(ft^3)";
+    }
+    else if(var2==true)
+    {
+        document.getElementById("t1").innerText="(cm)";
+        document.getElementById("t2").innerText="(cm)";
+        document.getElementById("t3").innerText="(cm^3)";
+    }
+}
+        
+</script>
+</head>
+
+<body>
+<h1>This web site will find the volume for a Cylinder, Sphere or Cone</h1>
+
+<p>
+<form ID="myform">
+Select the units(English or SI)
+<br />
+<label for='radio1'><input type="radio" name="units" id="English" onclick="changeunits('English')">English</label>
+<label for='radio2'><input type="radio" name="units" id="SI" onclick="changeunits('SI')">SI</label>
+<br /><br/>
+
+Select the shape
+<select name="shape" id="shape" onchange="changeshape(this.value)">
+<option value="Cylinder">Cylinder</option>
+<option value="Sphere">Sphere</option>
+<option value="Cone">Cone</option>
+</select>
+<br /><br />
+
+Enter the radius
+<input type="text" name="radius" id="radius" required>
+<br /><br />
+
+For the Cylinder and cone, Enter the height
+<input type="text" name="height" id="height">
+<br /><br />
+
+<input type="button" onclick="resetform()" value="reset the form">
+<br />
+</form>
+</p>
+
+<h2>Results</h2>
+<p id="p1">You didn't select the units.</p>
+<p id="p2">You didn't select the shape.</p>
+
+<table border="1">
+<tr>
+<td><b>Shape</b></td>
+<td><b>Radius</b></td>
+<td><b>Height</b></td>
+<td><b>Volume</b></td>
+</tr>
+<tr >
+<td>&nbsp;</td>
+<td id="t1">&nbsp;</td>
+<td id="t2">&nbsp;</td>
+<td id="t3">&nbsp;</td>
+</tr>
+<tr>
+<td id="t4">&nbsp;</td>
+<td id="r">&nbsp;</td>
+<td id="h">&nbsp;</td>
+<td id="v">&nbsp;</td>
+</tr>
+</table>
+
+<form>
+<button type="button" onclick="calculation()">Click to calculate<br />the results</button>
+</form>
+
+</body>
+</html>
